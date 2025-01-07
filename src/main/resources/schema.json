@@ -22,7 +22,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "pattern": { "type": "string", "enum": [""] },
+          "pattern": { "type": "string", "enum": ["LAYERED_ARCHITECTURE", "CUSTOM"] },
           "level": {
             "type": "string",
             "enum": ["NONE","INFO","WARNING","ERROR"],

@@ -1,4 +1,4 @@
-package com.patternpatrol.exceptions;
+package com.patternpatrol.exception;
 
 public class PatternPatrolException extends Throwable {
 }

@@ -1,7 +1,9 @@
 package com.patternpatrol;
 
 import com.patternpatrol.enums.LogLevel;
-import com.patternpatrol.exceptions.PatternPatrolException;
+import com.patternpatrol.exception.PatternPatrolException;
+import com.patternpatrol.model.Config;
+import com.patternpatrol.validation.ValidationService;
 import com.patternpatrol.validation.impl.JsonConfigValidationService;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -12,8 +14,6 @@ import java.io.File;
 
 @Mojo(name = "check")
 public class PatternPatrolPlugin extends AbstractMojo {
-    @Parameter(property = "project.basedir", readonly = false)
-    private String baseDirectory;
 
     @Parameter(property = "configFile", required = false)
     private File configFileLoc;
@@ -27,9 +27,12 @@ public class PatternPatrolPlugin extends AbstractMojo {
             File configFile = configFileLoc == null ? new File("pattern-patrol.json") : configFileLoc;
             JsonConfigValidationService configValidationService = new JsonConfigValidationService();
             configValidationService.validateConfig(configFile);
+            ObjectMapper mapper = new ObjectMapper();
+            Config config = mapper.readValue(configFile, Config.class);
 
             // Validate structure
-
+            ValidationService validationService = new ValidationService();
+            validationService.validate(config, failOn);
         } catch (PatternPatrolException ppe) {
             throw new MojoExecutionException("Failed to validate project structure", ppe);
         } catch (Exception e) {

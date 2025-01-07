@@ -1,4 +1,4 @@
-package com.patternpatrol.rules;
+package com.patternpatrol.rule;
 
 import com.patternpatrol.enums.FileNamingStandards;
 

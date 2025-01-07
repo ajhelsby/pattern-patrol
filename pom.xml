@@ -5,6 +5,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
+    <properties>
+        <checkstyle.version>10.21.0</checkstyle.version>
+        <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
+    </properties>
+
+
     <dependencies>
         <!-- Maven Plugin API -->
         <dependency>
@@ -42,6 +48,39 @@
                     <execution>
                         <goals>
                             <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
+            <!-- Checkstyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <excludes>checkstyle-suppressions.xml</excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
