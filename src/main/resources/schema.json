@@ -2,43 +2,82 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "base_package": {
+    "basePackage": {
       "type": "string"
     },
-    "files": {
+    "fileRule": {
       "type": "object",
       "properties": {
         "level": {
           "type": "string",
-          "enum": ["NONE","INFO","WARNING","ERROR"],
+          "enum": [
+            "OFF",
+            "TRACE",
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "ERROR",
+            "FATAL"
+          ],
           "default": "WARNING"
         },
-        "naming": { "type": "string", "enum": [""]}
+        "naming": {
+          "type": "string",
+          "enum": [
+            "ENDS_WITH_LAYERED"
+          ]
+        }
       },
-      "required": ["strict", "naming"]
+      "required": [
+        "naming"
+      ]
     },
-    "directories": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "pattern": { "type": "string", "enum": ["LAYERED_ARCHITECTURE", "CUSTOM"] },
-          "level": {
-            "type": "string",
-            "enum": ["NONE","INFO","WARNING","ERROR"],
-            "default": "WARNING"
-          },
-          "base_package": {"type": "string"},
-          "directories": {
-            "$ref": "#/properties/directories"
-          },
-          "files": {
-            "$ref": "#/properties/files"
+    "directoriesRule": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "enum": [
+            "LAYERED",
+            "DOMAIN_DRIVEN",
+            "IMPLEMENTATION"
+          ]
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "OFF",
+            "TRACE",
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "ERROR",
+            "FATAL"
+          ],
+          "default": "WARNING"
+        },
+        "base_package": {
+          "type": "string"
+        },
+        "ignorePackages": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "required": ["pattern"]
-      }
+        "directoriesRule": {
+          "$ref": "#/properties/directoriesRule"
+        },
+        "fileRule": {
+          "$ref": "#/properties/fileRule"
+        }
+      },
+      "required": [
+        "pattern"
+      ]
     }
   },
-  "required": ["files", "directories"]
+  "required": [
+    "directoriesRule"
+  ]
 }

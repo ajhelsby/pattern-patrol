@@ -1,0 +1,15 @@
+{
+  "basePackage": "com.patternpatrol",
+  "directoriesRule": {
+    "level": "ERROR",
+    "pattern": "LAYERED",
+    "ignorePackages": ["rule", "constant"],
+    "fileRule": {
+      "level": "INFO",
+      "naming": "ENDS_WITH_LAYERED"
+    },
+    "directoriesRule": {
+      "pattern": "IMPLEMENTATION"
+    }
+  }
+}

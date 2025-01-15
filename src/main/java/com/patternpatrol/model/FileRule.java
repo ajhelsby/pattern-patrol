@@ -1,7 +1,13 @@
 package com.patternpatrol.model;
 
-import com.patternpatrol.rule.FileNamingStandardRule;
+import com.patternpatrol.enums.FileNamingStandard;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class FileRule extends LogLevelRule {
-    private FileNamingStandardRule naming;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+public class FileRule extends LogLevelRule implements RuleType {
+    private FileNamingStandard naming;
 }

@@ -1,4 +1,10 @@
 package com.patternpatrol.exception;
 
-public class PatternPatrolException extends Throwable {
+import org.apache.maven.plugin.MojoExecutionException;
+
+public class PatternPatrolException extends MojoExecutionException {
+
+    public PatternPatrolException(final String message) {
+        super(message);
+    }
 }

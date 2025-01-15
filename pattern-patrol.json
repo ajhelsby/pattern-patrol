@@ -6,6 +6,10 @@
   },
   "directories": {
     "level":"ERROR",
-    "pattern": "FUNCTION"
+    "pattern": "FUNCTION",
+    "directories":{
+      "level":"ERROR",
+      "pattern": "LAYERED_ARCHITECTURE"
+    }
   }
 }
