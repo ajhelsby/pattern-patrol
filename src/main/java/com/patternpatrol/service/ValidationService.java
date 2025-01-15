@@ -24,14 +24,14 @@ public class ValidationService {
     private final DirectoryPatternService directoryPatternService = new DirectoryPatternService();
     private final FilePatternService filePatternService = new FilePatternService();
 
-    public List<CheckResult> validate(final Config config, final LogLevel failOn) throws IOException {
+    public List<CheckResult> validate(final Config config) throws IOException {
         List<CheckResult> checks = new ArrayList<>();
         List<String> reducedPaths = FileUtils.getAllPackagesAtBase(config);
         // Validate directories
         if (config.getDirectoriesRule() != null) {
             validateFilesAndPackages(config.getFileRule(), config.getDirectoriesRule(), reducedPaths, checks);
         }
-        System.out.println(failOn);
+
         checks.stream().forEach(line -> System.out.println(line));
         return checks;
     }

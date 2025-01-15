@@ -3,8 +3,11 @@ package com.patternpatrol.service.impl;
 import com.patternpatrol.enums.DirectoryPattern;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.DirectoryRule;
-import com.patternpatrol.rule.impl.Implementation;
-import com.patternpatrol.rule.impl.LayeredArchitecture;
+import com.patternpatrol.rule.impl.PackageContains;
+import com.patternpatrol.rule.impl.PackageEndsWith;
+import com.patternpatrol.rule.impl.PackageImplementation;
+import com.patternpatrol.rule.impl.PackageLayeredArchitecture;
+import com.patternpatrol.rule.impl.PackageStartsWith;
 import com.patternpatrol.service.PatternService;
 
 import java.util.List;
@@ -19,12 +22,24 @@ public class DirectoryPatternService implements PatternService<DirectoryRule, Di
         for (String file : files) {
             switch (pattern) {
                 case LAYERED:
-                    LayeredArchitecture layeredArchitecture = new LayeredArchitecture();
-                    checks.add(layeredArchitecture.check(rule, file));
+                    PackageLayeredArchitecture packageLayeredArchitecture = new PackageLayeredArchitecture();
+                    checks.add(packageLayeredArchitecture.check(rule, file));
                     break;
                 case IMPLEMENTATION:
-                    Implementation implementation = new Implementation();
-                    checks.add(implementation.check(rule, file));
+                    PackageImplementation packageImplementation = new PackageImplementation();
+                    checks.add(packageImplementation.check(rule, file));
+                    break;
+                case ENDS_WITH:
+                    PackageEndsWith packageEndsWith = new PackageEndsWith();
+                    checks.add(packageEndsWith.check(rule, file));
+                    break;
+                case STARTS_WITH:
+                    PackageStartsWith packageStartsWith = new PackageStartsWith();
+                    checks.add(packageStartsWith.check(rule, file));
+                    break;
+                case CONTAINS:
+                    PackageContains packageContains = new PackageContains();
+                    checks.add(packageContains.check(rule, file));
                     break;
                 default:
                     System.out.println("Todo");

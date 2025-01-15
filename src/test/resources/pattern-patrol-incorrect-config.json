@@ -1,14 +1,11 @@
 {
   "basePackage": "com.patternpatrol",
-  "fileRule": {
-    "level": "ERROR",
-    "naming": "ENDS_WITH",
-    "namingArg": "Plugin"
-  },
   "directoriesRule": {
     "level": "ERROR",
-    "pattern": "LAYERED",
     "ignorePackages": ["rule", "constant"],
+    "fileRule": {
+      "level": "INFO",
+    },
     "directoriesRule": {
       "pattern": "IMPLEMENTATION"
     }

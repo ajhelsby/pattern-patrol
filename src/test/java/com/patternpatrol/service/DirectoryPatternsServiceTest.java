@@ -4,6 +4,7 @@ import com.patternpatrol.enums.DirectoryPattern;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.DirectoryRule;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -20,39 +21,51 @@ import static org.junit.Assert.assertTrue;
 
 public class DirectoryPatternsServiceTest {
 
-    public static Stream<? extends Arguments> layeredArchitectureSuccess() {
+    public static Stream<? extends Arguments> directoryPatternSuccess() {
         return Stream.of(
-                Arguments.of("com/patternpatrol/repository"),
-                Arguments.of("com/patternpatrol/random/service"),
-                Arguments.of("com/patternpatrol/any/thing/goes/controller"),
-                Arguments.of("com/patternpatrol/model"),
-                Arguments.of("com/patternpatrol/helper"),
-                Arguments.of("util"),
-                Arguments.of("exception"),
-                Arguments.of(("enums"))
+                Arguments.of("repository", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("service", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("controller", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("model", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("helper", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("util", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("exception", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("enums", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("test")),
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("test"))
         );
     }
 
-    public static Stream<? extends Arguments> layeredArchitectureFails() {
+    public static Stream<? extends Arguments> directoryPatternFails() {
         return Stream.of(
-                Arguments.of("com/patternpatrol/repositories"),
-                Arguments.of("com/patternpatrol/random/services"),
-                Arguments.of("com/patternpatrol/any/thing/goes/whatever"),
-                Arguments.of("com/patternpatrol/feature"),
-                Arguments.of("com/patternpatrol")
+                Arguments.of("repositories", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("services", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("whatever", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("feature", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("patternpatrol", DirectoryPattern.LAYERED, null, null, null),
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("notTest"))
         );
     }
 
     @ParameterizedTest
-    @MethodSource("layeredArchitectureSuccess")
-    public void testShouldSucceedWithCorrectlyLayeredArchitecture(String fileName) {
+    @MethodSource("directoryPatternSuccess")
+    public void testShouldSucceedWithCorrectPackagePatterns(
+            String fileName,
+            DirectoryPattern directoryPattern,
+            String arg,
+            Set<String> args,
+            Set<String> ignore) {
+
         // Given
         Set<String> fileNames = Set.of(fileName);
         DirectoryRule directoryRule = new DirectoryRule();
+        directoryRule.setPatternArg(arg);
+        directoryRule.setPatternArgs(args);
+        directoryRule.setIgnorePackages(ignore);
         DirectoryPatternService directoryPatternService = new DirectoryPatternService();
 
         // When
-        List<CheckResult> checks = directoryPatternService.validate(directoryRule, DirectoryPattern.LAYERED, fileNames, List.of());
+        List<CheckResult> checks = directoryPatternService.validate(directoryRule, directoryPattern, fileNames, new ArrayList<>());
 
         // Then
         assertEquals(1, checks.size());
@@ -61,15 +74,24 @@ public class DirectoryPatternsServiceTest {
 
 
     @ParameterizedTest
-    @MethodSource("layeredArchitectureFails")
-    public void testShouldFailWithIncorrectlyLayeredArchitecture(String fileName) {
+    @MethodSource("directoryPatternFails")
+    public void testShouldFailWithIncorrectPackagePatterns(
+            String fileName,
+            DirectoryPattern directoryPattern,
+            String arg,
+            Set<String> args,
+            Set<String> ignore) {
+
         // Given
         Set<String> fileNames = Set.of(fileName);
         DirectoryRule directoryRule = new DirectoryRule();
+        directoryRule.setPatternArg(arg);
+        directoryRule.setPatternArgs(args);
+        directoryRule.setIgnorePackages(ignore);
         DirectoryPatternService directoryPatternService = new DirectoryPatternService();
 
         // When
-        List<CheckResult> checks = directoryPatternService.validate(directoryRule, DirectoryPattern.LAYERED, fileNames, List.of());
+        List<CheckResult> checks = directoryPatternService.validate(directoryRule, directoryPattern, fileNames, new ArrayList<>());
 
         // Then
         assertEquals(1, checks.size());

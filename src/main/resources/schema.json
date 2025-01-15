@@ -24,8 +24,25 @@
         "naming": {
           "type": "string",
           "enum": [
-            "ENDS_WITH_LAYERED"
+            "ENDS_WITH",
+            "ENDS_WITH_LAYERED",
+            "STARTS_WITH"
           ]
+        },
+        "namingArg": {
+          "type": "string"
+        },
+        "namingArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ignoreFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -40,8 +57,20 @@
           "enum": [
             "LAYERED",
             "DOMAIN_DRIVEN",
-            "IMPLEMENTATION"
+            "IMPLEMENTATION",
+            "ENDS_WITH",
+            "STARTS_WITH",
+            "CONTAINS"
           ]
+        },
+        "patternArg": {
+          "type": "string"
+        },
+        "patternArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "level": {
           "type": "string",
@@ -56,7 +85,7 @@
           ],
           "default": "WARNING"
         },
-        "base_package": {
+        "basePackage": {
           "type": "string"
         },
         "ignorePackages": {

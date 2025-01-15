@@ -3,7 +3,9 @@ package com.patternpatrol.service.impl;
 import com.patternpatrol.enums.FileNamingStandard;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.FileRule;
-import com.patternpatrol.rule.impl.EndsWithLayered;
+import com.patternpatrol.rule.impl.FileEndsWith;
+import com.patternpatrol.rule.impl.FileEndsWithLayered;
+import com.patternpatrol.rule.impl.FileStartsWith;
 import com.patternpatrol.service.PatternService;
 
 import java.util.List;
@@ -16,9 +18,17 @@ public class FilePatternService implements PatternService<FileRule, FileNamingSt
         List<CheckResult> checks = existingChecks;
         for (String file : files) {
             switch (fileNamingStandard) {
+                case ENDS_WITH:
+                    FileEndsWith fileEndsWith = new FileEndsWith();
+                    checks.add(fileEndsWith.check(rule, file));
+                    break;
+                case STARTS_WITH:
+                    FileStartsWith fileStartsWith = new FileStartsWith();
+                    checks.add(fileStartsWith.check(rule, file));
+                    break;
                 case ENDS_WITH_LAYERED:
-                    EndsWithLayered endsWithLayered = new EndsWithLayered();
-                    checks.add(endsWithLayered.check(rule, file));
+                    FileEndsWithLayered fileEndsWithLayered = new FileEndsWithLayered();
+                    checks.add(fileEndsWithLayered.check(rule, file));
                     break;
                 default:
                     System.out.println("Todo");

@@ -1,0 +1,26 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.anyproject</groupId>
+    <artifactId>test-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.patternpatrol</groupId>
+                <artifactId>pattern-patrol-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <configFile>src/test/resources/pattern-patrol-simple.json</configFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
