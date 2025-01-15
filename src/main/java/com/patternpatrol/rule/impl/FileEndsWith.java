@@ -7,7 +7,7 @@ import com.patternpatrol.rule.FileNamingStandardRule;
 
 public class FileEndsWith implements FileNamingStandardRule {
     @Override
-    public CheckResult check(FileRule fileRule, String targetPath) {
+    public CheckResult check(final FileRule fileRule, final String targetPath) {
         TextCheckHelper textCheckHelper = new TextCheckHelper();
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArg(fileRule.getNamingArg());

@@ -6,6 +6,6 @@ import java.util.List;
 
 public class ResultsService {
 
-    public void checkResults(List<CheckResult> results, String failOn) {
+    public void checkResults(final List<CheckResult> results, final String failOn) {
     }
 }

@@ -7,7 +7,7 @@ import com.patternpatrol.rule.DirectoryPatternRule;
 
 public class PackageStartsWith implements DirectoryPatternRule {
     @Override
-    public CheckResult check(DirectoryRule directoryRule, String targetPath) {
+    public CheckResult check(final DirectoryRule directoryRule, final String targetPath) {
         TextCheckHelper textCheckHelper = new TextCheckHelper();
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArg(directoryRule.getPatternArg());

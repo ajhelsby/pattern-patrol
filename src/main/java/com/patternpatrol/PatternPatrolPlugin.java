@@ -1,6 +1,5 @@
 package com.patternpatrol;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.patternpatrol.enums.LogLevel;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.Config;
@@ -44,7 +43,7 @@ public class PatternPatrolPlugin extends AbstractMojo {
 
             // Check results
             ResultsService resultsService = new ResultsService();
-            resultsService.checkResults(results, failOn);// failOnLevel);e
+            resultsService.checkResults(results, failOn);
         } catch (Exception e) {
             throw new MojoExecutionException("Failed to validate project structure", e);
         }

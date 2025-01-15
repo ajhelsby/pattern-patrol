@@ -13,7 +13,7 @@ public class FileEndsWithLayered implements FileNamingStandardRule {
     );
 
     @Override
-    public CheckResult check(FileRule fileRule, String targetPath) {
+    public CheckResult check(final FileRule fileRule,  final String targetPath) {
         TextCheckHelper textCheckHelper = new TextCheckHelper();
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArgs(ALLOWED_ENDS_WITH);
