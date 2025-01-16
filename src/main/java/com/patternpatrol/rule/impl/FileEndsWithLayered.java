@@ -18,6 +18,7 @@ public class FileEndsWithLayered implements FileNamingStandardRule {
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArgs(ALLOWED_ENDS_WITH);
         textCheckHelper.setIgnore(fileRule.getIgnoreFiles());
+        textCheckHelper.setLogLevel(fileRule.getLevel());
         return textCheckHelper.endsWith();
     }
 }

@@ -18,6 +18,7 @@ public class PackageLayeredArchitecture implements DirectoryPatternRule {
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArgs(ALLOWED_MODULE_NAMES);
         textCheckHelper.setIgnore(directoryRule.getIgnorePackages());
+        textCheckHelper.setLogLevel(directoryRule.getLevel());
         return textCheckHelper.contains();
     }
 }

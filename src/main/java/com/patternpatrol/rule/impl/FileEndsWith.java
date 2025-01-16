@@ -13,6 +13,7 @@ public class FileEndsWith implements FileNamingStandardRule {
         textCheckHelper.setArg(fileRule.getNamingArg());
         textCheckHelper.setArgs(fileRule.getNamingArgs());
         textCheckHelper.setIgnore(fileRule.getIgnoreFiles());
+        textCheckHelper.setLogLevel(fileRule.getLevel());
         return textCheckHelper.endsWith();
 
     }

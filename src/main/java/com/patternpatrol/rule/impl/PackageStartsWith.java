@@ -13,6 +13,7 @@ public class PackageStartsWith implements DirectoryPatternRule {
         textCheckHelper.setArg(directoryRule.getPatternArg());
         textCheckHelper.setArgs(directoryRule.getPatternArgs());
         textCheckHelper.setIgnore(directoryRule.getIgnorePackages());
+        textCheckHelper.setLogLevel(directoryRule.getLevel());
         return textCheckHelper.endsWith();
     }
 }

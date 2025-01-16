@@ -1,5 +1,6 @@
 package com.patternpatrol.service;
 
+import com.patternpatrol.exception.ValidationException;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.Config;
 import com.patternpatrol.model.DirectoryRule;
@@ -23,16 +24,19 @@ public class ValidationService {
     private final DirectoryPatternService directoryPatternService = new DirectoryPatternService();
     private final FilePatternService filePatternService = new FilePatternService();
 
-    public List<CheckResult> validate(final Config config) throws IOException {
-        List<CheckResult> checks = new ArrayList<>();
-        List<String> reducedPaths = FileUtils.getAllPackagesAtBase(config);
-        // Validate directories
-        if (config.getDirectoriesRule() != null) {
-            validateFilesAndPackages(config.getFileRule(), config.getDirectoriesRule(), reducedPaths, checks);
-        }
+    public List<CheckResult> validate(final Config config) throws IOException, ValidationException {
+        try {
+            List<CheckResult> checks = new ArrayList<>();
+            List<String> reducedPaths = FileUtils.getAllPackagesAtBase(config);
+            // Validate directories
+            if (config.getDirectoriesRule() != null) {
+                validateFilesAndPackages(config.getFileRule(), config.getDirectoriesRule(), reducedPaths, checks);
+            }
 
-        checks.stream().forEach(line -> System.out.println(line));
-        return checks;
+            return checks;
+        } catch (IOException ioe) {
+            throw new ValidationException(ioe.getMessage(), ioe);
+        }
     }
 
     private List<CheckResult> validateFilesAndPackages(final FileRule fileRule, final DirectoryRule directoryRule, final List<String> files, final List<CheckResult> checks) {
