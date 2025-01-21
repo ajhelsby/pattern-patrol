@@ -24,7 +24,7 @@ public class ValidationService {
     private final DirectoryPatternService directoryPatternService = new DirectoryPatternService();
     private final FilePatternService filePatternService = new FilePatternService();
 
-    public List<CheckResult> validate(final Config config) throws IOException, ValidationException {
+    public List<CheckResult> validate(final Config config) throws ValidationException {
         try {
             List<CheckResult> checks = new ArrayList<>();
             List<String> reducedPaths = FileUtils.getAllPackagesAtBase(config);

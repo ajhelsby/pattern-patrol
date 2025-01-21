@@ -5,10 +5,13 @@ import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.DirectoryRule;
 import com.patternpatrol.rule.DirectoryPatternRule;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 public class PackageImplementation implements DirectoryPatternRule {
-    private static final Set<String> ALLOWED_MODULE_NAMES = Set.of("impl", "implementation");
+    private static final Set<String> ALLOWED_MODULE_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("impl", "implementation")));
 
     @Override
     public CheckResult check(final DirectoryRule directoryRule, final String targetPath) {

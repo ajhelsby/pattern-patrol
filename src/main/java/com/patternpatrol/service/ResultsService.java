@@ -33,6 +33,8 @@ public class ResultsService {
                     log.error(line.getErrorMessage());
             }
         });
-        throw new ResultsException("Pattern Patrol Failed");
+        if (!failures.isEmpty()) {
+            throw new ResultsException("There are " + failures.size() + " errors reported by Pattern Patrol");
+        }
     }
 }

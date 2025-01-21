@@ -1,6 +1,7 @@
 package com.patternpatrol;
 
 
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import java.io.File;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PatternPatrolPluginTest {
 
@@ -58,6 +60,6 @@ public class PatternPatrolPluginTest {
         assertNotNull(mojo);
 
         // Then
-        assertDoesNotThrow(() -> mojo.execute());
+        assertThrows(MojoFailureException.class, () -> mojo.execute());
     }
 }
