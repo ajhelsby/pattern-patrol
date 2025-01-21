@@ -5,11 +5,15 @@ import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.DirectoryRule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import com.patternpatrol.service.impl.DirectoryPatternService;
+import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +22,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+ 
 
 public class DirectoryPatternsServiceTest {
 
@@ -31,8 +36,8 @@ public class DirectoryPatternsServiceTest {
                 Arguments.of("util", DirectoryPattern.LAYERED, null, null, null),
                 Arguments.of("exception", DirectoryPattern.LAYERED, null, null, null),
                 Arguments.of("enums", DirectoryPattern.LAYERED, null, null, null),
-                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("test")),
-                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("test"))
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Collections.unmodifiableSet(new HashSet<>(Arrays.asList("test")))),
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Collections.unmodifiableSet(new HashSet<>(Arrays.asList("test"))))
         );
     }
 
@@ -43,7 +48,7 @@ public class DirectoryPatternsServiceTest {
                 Arguments.of("whatever", DirectoryPattern.LAYERED, null, null, null),
                 Arguments.of("feature", DirectoryPattern.LAYERED, null, null, null),
                 Arguments.of("patternpatrol", DirectoryPattern.LAYERED, null, null, null),
-                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Set.of("notTest"))
+                Arguments.of("test", DirectoryPattern.LAYERED, null, null, Collections.unmodifiableSet(new HashSet<>(Arrays.asList("notTest"))))
         );
     }
 
@@ -57,7 +62,7 @@ public class DirectoryPatternsServiceTest {
             Set<String> ignore) {
 
         // Given
-        Set<String> fileNames = Set.of(fileName);
+        Set<String> fileNames = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(fileName)));
         DirectoryRule directoryRule = new DirectoryRule();
         directoryRule.setPatternArg(arg);
         directoryRule.setPatternArgs(args);
@@ -83,7 +88,7 @@ public class DirectoryPatternsServiceTest {
             Set<String> ignore) {
 
         // Given
-        Set<String> fileNames = Set.of(fileName);
+        Set<String> fileNames = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(fileName)));
         DirectoryRule directoryRule = new DirectoryRule();
         directoryRule.setPatternArg(arg);
         directoryRule.setPatternArgs(args);

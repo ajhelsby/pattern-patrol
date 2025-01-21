@@ -1,4 +1,4 @@
 package com.patternpatrol.enums;
 
-public interface RuleType {
+public interface RuleOptions {
 }

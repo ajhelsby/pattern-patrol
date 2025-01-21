@@ -12,6 +12,7 @@ public class PackageContains implements DirectoryPatternRule {
         textCheckHelper.setText(targetPath);
         textCheckHelper.setArgs(directoryRule.getPatternArgs());
         textCheckHelper.setIgnore(directoryRule.getIgnorePackages());
+        textCheckHelper.setLogLevel(directoryRule.getLevel());
         return textCheckHelper.contains();
     }
 }

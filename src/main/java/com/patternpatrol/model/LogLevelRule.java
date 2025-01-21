@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class LogLevelRule {
     @JsonProperty(required = false)
-    private LogLevel level;
+    private LogLevel level = LogLevel.ERROR;
 }
