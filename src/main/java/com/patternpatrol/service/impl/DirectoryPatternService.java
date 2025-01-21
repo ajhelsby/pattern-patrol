@@ -4,6 +4,7 @@ import com.patternpatrol.enums.DirectoryPattern;
 import com.patternpatrol.model.CheckResult;
 import com.patternpatrol.model.DirectoryRule;
 import com.patternpatrol.rule.impl.PackageContains;
+import com.patternpatrol.rule.impl.PackageDomainArchitecture;
 import com.patternpatrol.rule.impl.PackageEndsWith;
 import com.patternpatrol.rule.impl.PackageImplementation;
 import com.patternpatrol.rule.impl.PackageLayeredArchitecture;
@@ -28,6 +29,10 @@ public class DirectoryPatternService implements PatternService<DirectoryRule, Di
                 case IMPLEMENTATION:
                     PackageImplementation packageImplementation = new PackageImplementation();
                     checks.add(packageImplementation.check(rule, file));
+                    break;
+                case DOMAIN_DRIVEN:
+                    PackageDomainArchitecture packageDomainArchitecture = new PackageDomainArchitecture();
+                    checks.add(packageDomainArchitecture.check(rule, file));
                     break;
                 case ENDS_WITH:
                     PackageEndsWith packageEndsWith = new PackageEndsWith();

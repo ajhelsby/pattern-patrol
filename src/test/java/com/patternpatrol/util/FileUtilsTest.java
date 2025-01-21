@@ -1,12 +1,10 @@
 package com.patternpatrol.util;
 
 import com.patternpatrol.model.Config;
-import com.patternpatrol.service.ValidationService;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 

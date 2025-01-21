@@ -15,9 +15,18 @@ public class PackageImplementation implements DirectoryPatternRule {
 
     @Override
     public CheckResult check(final DirectoryRule directoryRule, final String targetPath) {
+        // Create list of allowed module names from defaults and args
+        Set<String> allowedModuleNames = ALLOWED_MODULE_NAMES;
+        if (directoryRule.getPatternArgs() != null) {
+            allowedModuleNames.addAll(directoryRule.getPatternArgs());
+        }
+        if (directoryRule.getPatternArg() != null) {
+            allowedModuleNames.add(directoryRule.getPatternArg());
+        }
+
         TextCheckHelper textCheckHelper = new TextCheckHelper();
         textCheckHelper.setText(targetPath);
-        textCheckHelper.setArgs(ALLOWED_MODULE_NAMES);
+        textCheckHelper.setArgs(allowedModuleNames);
         textCheckHelper.setIgnore(directoryRule.getIgnorePackages());
         textCheckHelper.setLogLevel(directoryRule.getLevel());
         return textCheckHelper.contains();

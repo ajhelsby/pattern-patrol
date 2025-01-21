@@ -26,7 +26,7 @@ public class PatternPatrolPluginTest {
         assertTrue(pom.exists());
 
         // When
-        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("check", pom);
+        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("verify", pom);
         assertNotNull(mojo);
 
         // Then
@@ -41,7 +41,7 @@ public class PatternPatrolPluginTest {
         assertTrue(pom.exists());
 
         // When
-        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("check", pom);
+        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("verify", pom);
         assertNotNull(mojo);
 
         // Then
@@ -56,7 +56,7 @@ public class PatternPatrolPluginTest {
         assertTrue(pom.exists());
 
         // When
-        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("check", pom);
+        PatternPatrolPlugin mojo = (PatternPatrolPlugin) rule.lookupMojo("verify", pom);
         assertNotNull(mojo);
 
         // Then
